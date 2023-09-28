@@ -1,0 +1,88 @@
+.popup {
+  display: flex;
+  justify-content: end;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+
+  opacity: 0;
+  transform: translate(100%);
+  background-color: rgba(0, 0, 0, .3);
+  width: 100vw;
+  min-height: 100vh;
+  transition: 0.2s ease-in;
+}
+
+.popup_active {
+  transform: translate(0%);
+  opacity: 1;
+}
+
+.popup__menuBlock {
+  width: 100%;
+  max-width: 520px;
+  height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  background-color: #202020;
+  color: #FFF;
+}
+
+.menuBlock__nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+.popup__closeBtn {
+  width: 22px;
+  height: 22px;
+  align-self: flex-end;
+  cursor: pointer;
+  background: url('../../../images/close.svg') 50% 50%/contain no-repeat;
+}
+
+.menuBlock__list {
+  padding: 0;
+  display: flex;
+  gap: 28px;
+  margin: 104px 0 0 0;
+  flex: 1 0 auto;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+}
+
+.menuBlock__item {
+  font-size: 18px;
+  line-height: 1.2;
+
+  transition: ease-in .2s;
+}
+
+.menuBlock__item:hover {
+  opacity: .7;
+}
+
+.menuBlock__item:first-child {
+  margin-top: 0;
+}
+
+.menuBlock__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.menuBlock__item_active {
+  border-bottom: 2px solid #FFF;
+}
+
+.menuBlock__item_profile {
+  margin-top: auto;
+}

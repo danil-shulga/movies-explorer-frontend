@@ -1,0 +1,44 @@
+.navTab {
+  display: flex;
+  justify-content: center;
+  min-height: 66px;
+  background: #272727;
+}
+
+.navTab__linksBlock {
+  display: flex;
+  align-items: center;
+}
+
+.navTab__linksList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.navTab__link {
+  color: #FFF;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.2;
+  text-decoration: underline;
+  transition: ease-in .2s;
+}
+
+.navTab__link:hover {
+  opacity: .7;
+}
+
+@media (max-width: 425px) {
+  .navTab__linksList {
+    gap: 24px;
+  }
+
+  .navTab__link {
+    font-size: 11px;
+  }
+}

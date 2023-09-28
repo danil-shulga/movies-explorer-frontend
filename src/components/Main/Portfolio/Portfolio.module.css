@@ -1,0 +1,164 @@
+.portfolio {
+  background: #202020;
+}
+
+.portfolio__grid {
+  margin: 66px 0 0;
+  display: grid;
+  grid-template-columns: minmax(310px, 600px) minmax(200px, auto);
+  gap: 50px;
+  grid-template-areas:  "textBlock  img";
+}
+
+.portfolio__textBlock {
+  display: grid;
+  grid-area: textBlock;
+  grid-template-rows: repeat(3, max-content);
+  gap: 22px;
+}
+
+.portfolio__name {
+  margin: 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1.2;
+}
+
+.portfolio__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.portfolio__about {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.portfolio__github {
+  align-self: end;
+  margin-top: 40px;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+
+  color: #FFF;
+  text-decoration: none;
+  transition: ease-in .2s;
+}
+
+.portfolio__github:hover {
+  opacity: .7;
+}
+
+.portfolio__img {
+  grid-area: img;
+  justify-self: end;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.portfolio__list {
+  margin: 100px 0 0;
+  padding: 0;
+  list-style: none;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #8b8b8b;
+}
+
+.portfolio__listItem {
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio__listItem:first-child {
+  margin: 30px 0 0;
+}
+
+@media (max-width: 768px) {
+  .portfolio__grid {
+    margin: 66px 0 0;
+    gap: 50px;
+  }
+
+  .portfolio__textBlock {
+    gap: 14px;
+  }
+
+  .portfolio__name {
+    font-size: 40px;
+    letter-spacing: -2px;
+  }
+
+  .portfolio__title {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .portfolio__about {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .portfolio__list {
+    margin: 90px 0 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .portfolio__grid {
+    margin: 66px 0 0;
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-rows: auto;
+    gap: 50px;
+    grid-template-areas: "img" "textBlock";
+  }
+
+  .portfolio__img {
+    justify-self: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .portfolio__textBlock {
+    gap: 20px;
+  }
+
+  .portfolio__name {
+    font-size: 30px;
+  }
+
+  .portfolio__title {
+    font-size: 12px;
+  }
+
+  .portfolio__about {
+    font-size: 11px;
+  }
+
+  .portfolio__github {
+    margin-top: 20px;
+  }
+
+  .portfolio__list {
+    margin: 70px 0 0;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+}

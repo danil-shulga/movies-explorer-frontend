@@ -1,0 +1,28 @@
+.simpleInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #FFF;
+  border-bottom: 1px solid #424242;
+}
+
+.simpleInput_nonBorder {
+  border-bottom: 0;
+}
+
+.simpleInput__input {
+  padding: 16px 0;
+  flex: 1 1 auto;
+  text-align: end;
+
+  background: 0;
+  border: 0;
+  outline: 0;
+
+  font-weight: 400;
+  color: #FFF;
+}
