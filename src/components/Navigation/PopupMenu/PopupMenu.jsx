@@ -18,15 +18,15 @@ function PopupMenu(props) {
         <nav className={styles.menuBlock__nav}>
           <ul className={styles.menuBlock__list}>
             <li
-              className={`${styles.menuBlock__item} ${styles.menuBlock__item_active}`}>
+              className={`${styles.menuBlock__item} ${(props.currentPage === 'main') && styles.menuBlock__item_active}`}>
               <Link className={styles.menuBlock__link} to='/'>Главная</Link>
             </li>
             <li
-              className={`${styles.menuBlock__item} ${styles.menuBlock__item_active}`}>
+              className={`${styles.menuBlock__item} ${(props.currentPage === 'movies') && styles.menuBlock__item_active}`}>
               <Link className={styles.menuBlock__link} to='/movies'>Фильмы</Link>
             </li>
             <li
-              className={`${styles.menuBlock__item} ${styles.menuBlock__item_active}`}>
+              className={`${styles.menuBlock__item} ${(props.currentPage === 'saved-movies') && styles.menuBlock__item_active}`}>
               <Link className={styles.menuBlock__link} to='/saved-movies'>Сохраненные фильмы</Link>
             </li>
             <li

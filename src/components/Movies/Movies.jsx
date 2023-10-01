@@ -8,9 +8,10 @@ import Footer from '../Footer/Footer';
 function Movies(props) {
   return (
     <>
-      <Header {...props} />
+      <Header {...props} currentPage='movies' />
       <SearchBlock />
       <MoviesCardList>
+        <MovieCard />
         <MovieCard />
         <MovieCard />
         <MovieCard />

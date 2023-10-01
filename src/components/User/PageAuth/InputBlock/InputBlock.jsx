@@ -1,12 +1,31 @@
 import React from 'react';
-import styles from './InputBlock.module.css'
+import styles from './InputBlock.module.css';
 
 function InputBlock(props) {
+  const { label, type, name, values, onChange, errors, required, minLength, maxLength } = props;
+
   return (
     <label className={styles.inputBlock}>
-      {props.label}
-      <input type={props.type} className={`${styles.inputBlock__input} ${props.error && styles.inputBlock__input_error}`} />
-      <span className={`${styles.inputBlock__errorMessage} ${props.error && styles.inputBlock__errorMessage_active}`}>error</span>
+      {label}
+      <input
+        type={type}
+        name={name}
+        value={values[name] || ''}
+        onChange={onChange}
+        required={required}
+        minLength={minLength}
+        maxLength={maxLength}
+
+        className={`${styles.inputBlock__input} ${
+          errors[name] && styles.inputBlock__input_error
+        }`}
+      />
+      <span
+        className={`${styles.inputBlock__errorMessage} ${
+          errors[name] && styles.inputBlock__errorMessage_active
+        }`}>
+        {errors[name]}
+      </span>
     </label>
   );
 }

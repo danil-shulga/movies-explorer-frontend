@@ -20,3 +20,12 @@
 .submitButton:hover {
   opacity: .8;
 }
+
+.submitButton_disabled {
+  background-color: #404f68;
+  cursor: default;
+}
+
+.submitButton_disabled:hover {
+  opacity: 1;
+}

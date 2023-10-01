@@ -7,7 +7,7 @@ import PopupMenu from '../Navigation/PopupMenu/PopupMenu';
 import { Link } from 'react-router-dom';
 
 function Header(props) {
-  const { loggedIn, header_light } = props;
+  const { loggedIn, header_light, currentPage } = props;
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState(false);
 
   function burgerMenuToggle() {
@@ -24,12 +24,12 @@ function Header(props) {
         <>
           <nav className={styles.header__navFilms}>
             <li>
-              <Link className={styles.header__link} to='/movies'>
+              <Link className={`${styles.header__link} ${(props.currentPage === 'movies') && styles.header__link_active}`} to='/movies'>
                 Фильмы
               </Link>
             </li>
             <li>
-              <Link className={styles.header__link} to='/saved-movies'>
+              <Link className={`${styles.header__link} ${(props.currentPage === 'saved-movies') && styles.header__link_active}`} to='/saved-movies'>
                 Сохраненные фильмы
               </Link>
             </li>
@@ -41,6 +41,7 @@ function Header(props) {
             onClick={burgerMenuToggle}
             className={styles.header__burgerBtn}></div>
           <PopupMenu
+            currentPage={currentPage}
             burgerMenuIsOpen={burgerMenuIsOpen}
             burgerMenuToggle={burgerMenuToggle}
           />

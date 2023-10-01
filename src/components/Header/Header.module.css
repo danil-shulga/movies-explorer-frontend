@@ -49,6 +49,10 @@
   opacity: .7;
 }
 
+.header__link_active {
+  font-weight: 500;
+}
+
 .header__link_login {
   padding: 8px 20px;
   background-color: #3ddc84;

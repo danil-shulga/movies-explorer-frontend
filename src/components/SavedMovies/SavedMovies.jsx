@@ -8,7 +8,7 @@ import Header from '../Header/Header';
 function SavedMovies(props) {
   return (
     <>
-    <Header {...props} />
+    <Header {...props}  currentPage='saved-movies' />
       <SearchBlock />
       <MoviesCardList>
         <MovieCard deleteButton/>

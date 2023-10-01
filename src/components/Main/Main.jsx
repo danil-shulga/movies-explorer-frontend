@@ -10,7 +10,7 @@ import Footer from '../Footer/Footer';
 function Main(props) {
   return (
     <>
-      <Header {...props} header_light />
+      <Header {...props} currentPage='main' header_light />
       <Promo />
       <NavTab />
       <AboutProject />

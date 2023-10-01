@@ -26,3 +26,14 @@
   font-weight: 400;
   color: #FFF;
 }
+
+.simpleInput__input_error {
+  color: #ee3465;
+}
+
+.simpleInput__errorMessage {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 2;
+  color: #ee3465;
+}
