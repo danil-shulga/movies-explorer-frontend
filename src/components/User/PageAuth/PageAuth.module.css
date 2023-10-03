@@ -51,6 +51,12 @@
   padding-left: 6px;
   text-decoration: none;
   color: #4285f4;
+
+  transition: ease-in .3s;
+}
+
+.pageAuth__nav_link:hover {
+  opacity: .7;
 }
 
 
@@ -63,5 +69,14 @@
 @media (max-width: 425px) {
   .pageAuth {
     padding: 56px calc(30px + (50 - 30) * (100vw - 320px) / (768 - 320)) 30px;
+  }
+
+  .pageAuth__img {
+    align-self: center;
+  }
+
+  .pageAuth__title {
+    margin-top: 10px;
+    align-self: center;
   }
 }

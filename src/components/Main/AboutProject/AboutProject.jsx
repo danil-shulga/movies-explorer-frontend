@@ -7,7 +7,7 @@ import Section from '../Section/Section';
 function AboutProject(props) {
   return (
     <>
-      <Section className={styles.aboutProject} title="О проекте">
+      <Section className={styles.aboutProject} id='AboutProject' title="О проекте">
         <div className={styles.aboutProject__grid}>
           <div className={styles.aboutProject__textBlock1}>
             <TextBlock

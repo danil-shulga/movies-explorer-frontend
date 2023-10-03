@@ -17,19 +17,28 @@ function Header(props) {
   return (
     <header
       className={`${styles.header} ${header_light && styles.header_light}`}>
-      <Link to='/'>
-        <img className={styles.header__logo} src={headerLogo} alt="" />
+      <Link to="/">
+        <img className={styles.header__logo} src={headerLogo} alt="логотип" />
       </Link>
       {loggedIn ? (
         <>
           <nav className={styles.header__navFilms}>
             <li>
-              <Link className={`${styles.header__link} ${(props.currentPage === 'movies') && styles.header__link_active}`} to='/movies'>
+              <Link
+                className={`${styles.header__link} ${
+                  props.currentPage === 'movies' && styles.header__link_active
+                }`}
+                to="/movies">
                 Фильмы
               </Link>
             </li>
             <li>
-              <Link className={`${styles.header__link} ${(props.currentPage === 'saved-movies') && styles.header__link_active}`} to='/saved-movies'>
+              <Link
+                className={`${styles.header__link} ${
+                  props.currentPage === 'saved-movies' &&
+                  styles.header__link_active
+                }`}
+                to="/saved-movies">
                 Сохраненные фильмы
               </Link>
             </li>
@@ -37,9 +46,10 @@ function Header(props) {
           <div className={styles.header__profileWrapper}>
             <ProfileBtn light={header_light}>Аккаунт</ProfileBtn>
           </div>
-          <div
+          <button
+            type="button"
             onClick={burgerMenuToggle}
-            className={styles.header__burgerBtn}></div>
+            className={styles.header__burgerBtn}></button>
           <PopupMenu
             currentPage={currentPage}
             burgerMenuIsOpen={burgerMenuIsOpen}
@@ -49,14 +59,14 @@ function Header(props) {
       ) : (
         <nav className={styles.header__navAuth}>
           <li>
-            <Link className={styles.header__link} to='/signup'>
+            <Link className={styles.header__link} to="/signup">
               Регистрация
             </Link>
           </li>
           <li>
             <Link
               className={`${styles.header__link} ${styles.header__link_login}`}
-              to='/signin'>
+              to="/signin">
               Войти
             </Link>
           </li>

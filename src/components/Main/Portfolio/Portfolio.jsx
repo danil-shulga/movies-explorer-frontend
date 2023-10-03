@@ -2,11 +2,12 @@ import React from 'react';
 import Section from '../Section/Section';
 import styles from './Portfolio.module.css';
 import PortfolioLink from './PortfolioLink/PortfolioLink';
+import { Link } from 'react-router-dom';
 
 function Portfolio(props) {
   return (
     <>
-      <Section title="Студент" className={styles.portfolio}>
+      <Section id="Portfolio" title="Студент" className={styles.portfolio}>
         <div className={styles.portfolio__grid}>
           <div className={styles.portfolio__textBlock}>
             <p className={styles.portfolio__name}>Виталий</p>
@@ -29,7 +30,7 @@ function Portfolio(props) {
           </div>
           <img
             className={styles.portfolio__img}
-            src={require('../../../images/pic__COLOR_pic.png')}
+            src={require('../../../images/profile-photo.png')}
             alt="фото студента"
           />
         </div>
@@ -37,17 +38,17 @@ function Portfolio(props) {
         <ul className={styles.portfolio__list}>
           Портфолио
           <li className={styles.portfolio__listItem}>
-            <PortfolioLink href="https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/">
+            <PortfolioLink href="https://github.com/danil-shulga/how-to-learn">
               Статичный сайт
             </PortfolioLink>
           </li>
           <li className={styles.portfolio__listItem}>
-            <PortfolioLink href="https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/">
+            <PortfolioLink href="https://github.com/danil-shulga/russian-travel">
               Адаптивный сайт
             </PortfolioLink>
           </li>
           <li className={styles.portfolio__listItem}>
-            <PortfolioLink href="https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/" withoutBorder>
+            <PortfolioLink href="https://github.com/danil-shulga/react-mesto-api-full-gha" withoutBorder>
               Одностраничное приложение
             </PortfolioLink>
           </li>

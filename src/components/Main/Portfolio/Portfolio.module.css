@@ -5,7 +5,7 @@
 .portfolio__grid {
   margin: 66px 0 0;
   display: grid;
-  grid-template-columns: minmax(310px, 600px) minmax(200px, auto);
+  grid-template-columns: minmax(300px, 600px) minmax(150px, auto);
   gap: 50px;
   grid-template-areas:  "textBlock  img";
 }

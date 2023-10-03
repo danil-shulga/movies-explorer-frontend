@@ -1,3 +1,8 @@
+.profile__main {
+  display: flex;
+  flex: 1 1 auto;
+}
+
 .profile__title {
   margin-top: 74px;
   color: #fff;
@@ -9,7 +14,7 @@
 .profile__form {
   display: flex;
   flex-direction: column;
-  margin-top: 120px;
+  margin-top: 90px;
   width: 100%;
   flex: 1 1 auto;
   max-width: 410px;
@@ -31,6 +36,11 @@
   line-height: 1.2;
   font-weight: 500;
   color: #ee3465;
+  transition: ease-in .3s;
+}
+
+.profile__navLink:hover {
+  opacity: .7;
 }
 
 @media (max-width: 768px) {
@@ -53,7 +63,7 @@
   }
 
   .profile__form {
-    margin-top: 80px;
+    margin-top: 64px;
   }
 
   .profile__nav {

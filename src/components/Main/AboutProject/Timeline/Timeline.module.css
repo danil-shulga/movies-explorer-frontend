@@ -10,6 +10,8 @@
 
 .timeline__line1 {
   grid-area: line1;
+  margin: 0;
+  padding: 0;
   background-color: #3ddc84;
   display: flex;
   justify-content: center;
@@ -22,6 +24,8 @@
 
 .timeline__line2 {
   grid-area: line2;
+  margin: 0;
+  padding: 0;
   background-color: #303030;
   display: flex;
   justify-content: center;
@@ -34,6 +38,8 @@
 
 .timeline__subtitle1 {
   grid-area: subtitle1;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,6 +51,8 @@
 
 .timeline__subtitle2 {
   grid-area: subtitle2;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;

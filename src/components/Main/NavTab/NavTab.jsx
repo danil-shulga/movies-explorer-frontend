@@ -3,15 +3,15 @@ import styles from './NavTab.module.css'
 
 function NavTab(props) {
   return (
-    <div className={styles.navTab}>
+    <section className={styles.navTab}>
       <nav className={styles.navTab__linksBlock}>
         <ul className={styles.navTab__linksList}>
-          <li><a href='/#' className={styles.navTab__link}>О проекте</a></li>
-          <li><a href='/#' className={styles.navTab__link}>Технологии</a></li>
-          <li><a href='/#' className={styles.navTab__link}>Студент</a></li>
+          <li><a href='#AboutProject' className={styles.navTab__link}>О проекте</a></li>
+          <li><a href='#Techs' className={styles.navTab__link}>Технологии</a></li>
+          <li><a href='#Portfolio' className={styles.navTab__link}>Студент</a></li>
         </ul>
       </nav>
-    </div>
+    </section>
   );
 }
 

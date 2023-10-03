@@ -3,12 +3,12 @@ import styles from './Timeline.module.css'
 
 function Timeline(props) {
   return (
-    <div className={styles.timeline__grid}>
-      <div className={styles.timeline__line1}>1 неделя</div>
-      <div className={styles.timeline__line2}>4 недели</div>
-      <div className={styles.timeline__subtitle1}>Back-end</div>
-      <div className={styles.timeline__subtitle2}>Front-end</div>
-    </div>
+    <section className={styles.timeline__grid} aria-label='схема разработки проекта'>
+      <p className={styles.timeline__line1}>1 неделя</p>
+      <p className={styles.timeline__line2}>4 недели</p>
+      <p className={styles.timeline__subtitle1}>Back-end</p>
+      <p className={styles.timeline__subtitle2}>Front-end</p>
+    </section>
   );
 }
 

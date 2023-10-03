@@ -10,33 +10,37 @@ function Login(props) {
     useFormAndValidation();
 
   return (
-    <PageAuth
-      title="Рады видеть!"
-      navMessage="Ещё не зарегистрированы?"
-      navLinkMessage="Регистрация"
-      navLinkPath="/signup">
-      <form className={styles.login__form}>
-        <InputBlock
-          label="E-mail"
-          type="email"
-          name="userEmail"
-          values={values}
-          onChange={handleChange}
-          errors={errors}
-          required
-        />
-        <InputBlock
-          label="Пароль"
-          type="password"
-          name="userPassword"
-          values={values}
-          onChange={handleChange}
-          errors={errors}
-          required
-        />
-        <SubmitButton text="Войти" onClick={resetForm} isValid={isValid} />
-      </form>
-    </PageAuth>
+    <main className={styles.login__main}>
+      <PageAuth
+        title="Рады видеть!"
+        navMessage="Ещё не зарегистрированы?"
+        navLinkMessage="Регистрация"
+        navLinkPath="/signup">
+        <form className={styles.login__form}>
+          <InputBlock
+            label="E-mail"
+            type="email"
+            name="userEmail"
+            placeholder='E-mail'
+            values={values}
+            onChange={handleChange}
+            errors={errors}
+            required
+          />
+          <InputBlock
+            label="Пароль"
+            type="password"
+            name="userPassword"
+            placeholder='Password'
+            values={values}
+            onChange={handleChange}
+            errors={errors}
+            required
+          />
+          <SubmitButton text="Войти" onClick={resetForm} isValid={isValid} />
+        </form>
+      </PageAuth>
+    </main>
   );
 }
 

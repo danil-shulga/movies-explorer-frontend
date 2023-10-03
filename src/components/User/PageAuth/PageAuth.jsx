@@ -8,9 +8,9 @@ function PageAuth(props) {
     <section className={styles.pageAuth}>
       <div className={styles.pageAuth__contentWrapper}>
         <Link className={styles.pageAuth__img} to='/'>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="логотип" />
         </Link>
-        <h2 className={styles.pageAuth__title}>{props.title}</h2>
+        <h1 className={styles.pageAuth__title}>{props.title}</h1>
         {props.children}
       </div>
       <p className={styles.pageAuth__nav}>

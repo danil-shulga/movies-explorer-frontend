@@ -1,12 +1,12 @@
 .search {
   margin: 0;
-  padding: 60px calc(30px + (70 - 30) * (100vw - 768px) / (1750 - 768)) 10px;
+  padding: 60px 70px 10px;
   background-color: #202020;
 }
 
 .search__form {
   margin: 0;
-  padding-bottom: 60px;
+  padding-bottom: 70px;
   border-bottom: 1px solid #424242;
 }
 
@@ -61,14 +61,26 @@
 .search__params {
   margin-top: 40px;
   text-align: center;
+
+  transition: ease-in .3s;
+}
+
+.search__params:hover {
+  opacity: .8;
+}
+
+@media (max-width: 1280px) {
+  .search {
+    padding: 60px calc(30px + (70 - 30) * (100vw - 768px) / (1280 - 768)) 10px;
+  }
 }
 
 @media (max-width: 768px) {
   .search {
-    padding-top: 80px;
+    padding: 80px calc(20px + (30 - 20) * (100vw - 320px) / (768 - 320)) 10px;
   }
 
   .search__form {
-    padding-bottom: 40px;
+    padding-bottom: 50px;
   }
 }

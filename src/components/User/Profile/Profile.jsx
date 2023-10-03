@@ -12,40 +12,47 @@ function Profile(props) {
   return (
     <>
       <Header {...props} />
-      <PageProfile title="Привет, User!">
-        <form className={styles.profile__form} action="">
-          <SimpleInput
-            label="Имя"
-            placeholder="userName"
-            type="text"
-            name="userName"
-            values={values}
-            onChange={handleChange}
-            errors={errors}
-            required
-            minLength={3}
-            maxLength={30}
-          />
-          <SimpleInput
-            label="E-mail"
-            placeholder="userEmail"
-            name="userEmail"
-            values={values}
-            onChange={handleChange}
-            errors={errors}
-            required
-            minLength={3}
-            maxLength={30}
-            nonBorder
-          />
-          <SimpleSubmit text="Редактировать" isValid={isValid} onClick={resetForm} />
-        </form>
-        <p className={styles.profile__nav}>
-          <a className={styles.profile__navLink} href="/#">
-            Выйти из аккаунта
-          </a>
-        </p>
-      </PageProfile>
+      <main  className={styles.profile__main}>
+        <PageProfile title="Привет, User!">
+          <form className={styles.profile__form} action="">
+            <SimpleInput
+              label="Имя"
+              placeholder="userName"
+              type="text"
+              name="userName"
+              values={values}
+              onChange={handleChange}
+              errors={errors}
+              required
+              minLength={3}
+              maxLength={30}
+            />
+            <SimpleInput
+              label="E-mail"
+              placeholder="userEmail"
+              type="email"
+              name="userEmail"
+              values={values}
+              onChange={handleChange}
+              errors={errors}
+              required
+              minLength={3}
+              maxLength={30}
+              nonBorder
+            />
+            <SimpleSubmit
+              text="Редактировать"
+              isValid={isValid}
+              onClick={resetForm}
+            />
+          </form>
+          <p className={styles.profile__nav}>
+            <a className={styles.profile__navLink} href="/#">
+              Выйти из аккаунта
+            </a>
+          </p>
+        </PageProfile>
+      </main>
     </>
   );
 }

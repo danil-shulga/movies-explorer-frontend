@@ -11,6 +11,7 @@ function SearchBlock(props) {
             className={styles.search__input}
             type="text"
             placeholder="Фильм"
+            required
           />
           <input className={styles.search__submit} type="submit" value="" />
         </div>

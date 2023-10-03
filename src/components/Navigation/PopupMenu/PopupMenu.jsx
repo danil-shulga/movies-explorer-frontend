@@ -12,9 +12,10 @@ function PopupMenu(props) {
       <div
         onClick={(e) => e.stopPropagation()}
         className={styles.popup__menuBlock}>
-        <div
+        <button
+          type='button'
           onClick={burgerMenuToggle}
-          className={styles.popup__closeBtn}></div>
+          className={styles.popup__closeBtn}></button>
         <nav className={styles.menuBlock__nav}>
           <ul className={styles.menuBlock__list}>
             <li
