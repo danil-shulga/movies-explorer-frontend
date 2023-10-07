@@ -1,0 +1,39 @@
+.aboutProject {
+  background-color: #202020;
+}
+
+.aboutProject__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(auto-fit, auto);
+  gap: 40px;
+  grid-template-areas:
+    "textBlock1   textBlock2"
+    "timeline     timeline";
+
+  color: #FFF;
+}
+
+.aboutProject__textBlock1 {
+  grid-area: textBlock1;
+}
+
+.aboutProject__textBlock2 {
+  grid-area: textBlock2;
+}
+
+.aboutProject__timeline {
+  grid-area: timeline;
+}
+
+@media (max-width: 425px) {
+  .aboutProject__grid {
+    margin-top: 60px;
+    grid-template-columns: 1fr;
+    gap: 58px;
+    grid-template-areas:
+      "textBlock1"
+      "textBlock2"
+      "timeline";
+  }
+}

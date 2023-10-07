@@ -1,0 +1,34 @@
+.profile {
+  display: flex;
+  gap: 7px;
+  
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+
+  color: #fff;
+  text-decoration: none;
+
+  transition: ease-in .2s;
+}
+
+.profile:hover {
+  opacity: .8;
+}
+
+.profile__text {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.profile__icon {
+  width: 26px;
+  height: 26px;
+  background: #313131 url('../../../images/profile_icon.svg') center center / 50% no-repeat;
+  border-radius: 50%;
+}
+
+.profile__icon_light {
+  background-color: #0F4157;
+}
