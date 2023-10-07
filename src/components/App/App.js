@@ -10,7 +10,7 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [loggedIn] = useState(true);
+  const [loggedIn] = useState(false);
 
   return (
     <Routes>
