@@ -67,6 +67,7 @@ function Register(props) {
             type="email"
             name="email"
             placeholder="E-mail"
+            pattern="[^@]+@[^@]+\.[a-zA-Z]{2,}"
             values={values}
             onChange={handleChange}
             errors={errors}
