@@ -1,13 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Register.module.css';
 import PageAuth from '../PageAuth/PageAuth';
 import InputBlock from '../PageAuth/InputBlock/InputBlock';
 import SubmitButton from '../PageAuth/SubmitButton/SubmitButton';
 import useFormAndValidation from '../../../hooks/useFormAndInputValidation';
+import mainApi from '../../../utils/MainApi';
+import { useNavigate } from 'react-router-dom';
 
 function Register(props) {
+  const { setLoggedIn } = props;
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
+  const navigate = useNavigate();
+
+  function setToken(res) {
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        token: res.token,
+      })
+    );
+  }
+
+  function handleSignUpSubmit(e) {
+    e.preventDefault();
+    console.log(values);
+    mainApi
+      .signup(values)
+      .then((res) => {
+        console.log(res);
+        mainApi
+          .signin(values)
+          .then((res) => {
+            setToken(res);
+            setLoggedIn(true);
+            navigate('/movies');
+            console.log(res);
+          })
+          .catch((err) => console.error("ошибка логина после регистрации", err ));
+      })
+      .catch((err) => console.log("ошибка регистрации", err ));
+  }
 
   return (
     <main className={styles.register__main}>
@@ -20,7 +53,7 @@ function Register(props) {
           <InputBlock
             label="Имя"
             type="text"
-            name="userName"
+            name="name"
             placeholder="Name"
             values={values}
             onChange={handleChange}
@@ -32,7 +65,7 @@ function Register(props) {
           <InputBlock
             label="E-mail"
             type="email"
-            name="userEmail"
+            name="email"
             placeholder="E-mail"
             values={values}
             onChange={handleChange}
@@ -42,7 +75,7 @@ function Register(props) {
           <InputBlock
             label="Пароль"
             type="password"
-            name="userPassword"
+            name="password"
             placeholder="Password"
             values={values}
             onChange={handleChange}
@@ -53,7 +86,10 @@ function Register(props) {
           />
           <SubmitButton
             text="Зарегистрироваться"
-            onClick={resetForm}
+            onClick={(e) => {
+              handleSignUpSubmit(e);
+              resetForm();
+            }}
             isValid={isValid}
           />
         </form>

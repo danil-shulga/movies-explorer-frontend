@@ -30,24 +30,28 @@
   line-height: 1.2;
 }
 
-.notFoundPage__link {
-  padding-bottom: 60px;
+.notFoundPage__buttonBack {
+  margin-bottom: 60px;
 
   text-decoration: none;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
+
+  background: 0;
+  border: 0;
+  cursor: pointer;
   color: #4285f4;
 
   transition: ease-in .3s;
 }
 
-.notFoundPage__link:hover {
+.notFoundPage__buttonBack:hover {
   opacity: .7;
 }
 
 @media (max-width: 768px) {
-  .notFoundPage__link {
+  .notFoundPage__buttonBack {
     padding-bottom: 220px;
   }
 }
@@ -62,7 +66,7 @@
     font-size: 12px;
   }
 
-  .notFoundPage__link {
+  .notFoundPage__buttonBack {
     padding-bottom: 30px;
   }
 }

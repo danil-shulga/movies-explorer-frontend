@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './NotFoundPage.module.css';
+import { useNavigate } from 'react-router-dom'
 
 function NotFoundPage(props) {
+  const navigate = useNavigate()
+
   return (
     <main className={styles.notFoundPage}>
       <section className={styles.notFoundPage}>
@@ -9,9 +12,9 @@ function NotFoundPage(props) {
           <h1 className={styles.notFoundPage__title}>404</h1>
           <p className={styles.notFoundPage__subtitle}>Страница не найдена</p>
         </div>
-        <a className={styles.notFoundPage__link} href="/#">
+        <button className={styles.notFoundPage__buttonBack} onClick={ () => navigate(-1)}>
           Назад
-        </a>
+        </button>
       </section>
     </main>
   );

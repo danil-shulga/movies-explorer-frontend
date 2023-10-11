@@ -13,15 +13,19 @@
 
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(300px, 364px));
   gap: 37px 24px;
-  justify-content: center;
+  justify-content: start;
   box-sizing: border-box;
 }
 
 @media (max-width: 1280px) {
   .moviesCardList {
     padding: 70px calc(30px + (70 - 30) * (100vw - 768px) / (1280 - 768)) 10px;
+  }
+
+  .moviesCardList__list {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
   }
 }
 
@@ -31,6 +35,7 @@
   }
 
   .moviesCardList__list {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px
   }
 }

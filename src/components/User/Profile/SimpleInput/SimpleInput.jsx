@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './SimpleInput.module.css';
+import CurrentUserContext from '../../../../contexts/CurrentUserContext';
 
 function SimpleInput(props) {
-  const { label, type, placeholder, name, values, onChange, errors, required, minLength, maxLength } =
-    props;
+  const {
+    label,
+    type,
+    placeholder,
+    name,
+    values,
+    onChange,
+    errors,
+    required,
+    pattern,
+    minLength,
+    maxLength,
+    isDisable
+  } = props;
 
   return (
     <>
@@ -14,9 +27,8 @@ function SimpleInput(props) {
         htmlFor="">
         {label}
         <input
-          className={`${styles.simpleInput__input} ${
-            errors[name] && styles.simpleInput__input_error
-          }`}
+          className={`${styles.simpleInput__input}`}
+          disabled={isDisable}
           type={type}
           placeholder={placeholder}
           name={name}
@@ -24,6 +36,7 @@ function SimpleInput(props) {
           onChange={onChange}
           autoComplete="off"
           required={required}
+          pattern={pattern}
           minLength={minLength}
           maxLength={maxLength}
         />
