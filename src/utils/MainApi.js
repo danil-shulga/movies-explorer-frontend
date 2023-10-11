@@ -110,7 +110,7 @@ class MainApi {
 
 const mainApi = new MainApi({
   // baseUrl: 'http://localhost:3000',
-  baseUrl: 'https://api.danil-shulga-mesto.nomoredomainsicu.ru',
+  baseUrl: 'https://api.danil-shulga-movie.nomoredomainsrocks.ru',
   headers: { 'Content-Type': 'application/json' },
 });
 
