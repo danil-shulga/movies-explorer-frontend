@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Register.module.css';
 import PageAuth from '../PageAuth/PageAuth';
 import InputBlock from '../PageAuth/InputBlock/InputBlock';
@@ -12,6 +12,8 @@ function Register(props) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
   const navigate = useNavigate();
+  const [serverResponseMessage, setServerResponseMessage] = useState('');
+  const [serverResponseError, setServerResponseError] = useState(false);
 
   function setToken(res) {
     localStorage.setItem(
@@ -28,18 +30,21 @@ function Register(props) {
     mainApi
       .signup(values)
       .then((res) => {
-        console.log(res);
+        setServerResponseError(false)
+        setServerResponseMessage('Вы успешно зарегистрировались')
         mainApi
           .signin(values)
           .then((res) => {
             setToken(res);
             setLoggedIn(true);
             navigate('/movies');
-            console.log(res);
           })
           .catch((err) => console.error("ошибка логина после регистрации", err ));
       })
-      .catch((err) => console.log("ошибка регистрации", err ));
+      .catch((err) => {
+        setServerResponseError(true)
+        if (err.status === 409) setServerResponseMessage('Email уже используется')
+        console.error("ошибка регистрации", err )});
   }
 
   return (
@@ -87,6 +92,8 @@ function Register(props) {
           />
           <SubmitButton
             text="Зарегистрироваться"
+            message={serverResponseMessage}
+            error={serverResponseError}
             onClick={(e) => {
               handleSignUpSubmit(e);
               resetForm();

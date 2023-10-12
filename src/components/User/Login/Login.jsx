@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Login.module.css';
 import PageAuth from '../PageAuth/PageAuth';
 import InputBlock from '../PageAuth/InputBlock/InputBlock';
 import SubmitButton from '../PageAuth/SubmitButton/SubmitButton';
 import useFormAndValidation from '../../../hooks/useFormAndInputValidation';
 import mainApi from '../../../utils/MainApi';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
-  const { setLoggedIn } = props
+  const { setLoggedIn } = props;
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [serverResponseMessage, setServerResponseMessage] = useState('');
+  const [serverResponseError, setServerResponseError] = useState(false);
 
   function setToken(res) {
     localStorage.setItem(
@@ -27,11 +29,19 @@ function Login(props) {
     mainApi
       .signin(values)
       .then((res) => {
-        setToken(res)
-        setLoggedIn(true)
-        navigate('/movies')
+        setServerResponseError(false);
+        setServerResponseMessage('Успешный вход в систему');
+        setToken(res);
+        setLoggedIn(true);
+        navigate('/movies');
       })
-      .catch((err) => console.error("ошибка логина" ,err));
+      .catch((err) => {
+        setServerResponseError(true);
+        console.error('ошибка логина', err);
+        if (err.status === 401)
+          setServerResponseMessage('Неверная почта или пароль');
+        else setServerResponseMessage('Ошибка при входе в систему');
+      });
   }
 
   return (
@@ -65,9 +75,11 @@ function Login(props) {
           />
           <SubmitButton
             text="Войти"
+            message={serverResponseMessage}
+            error={serverResponseError}
             onClick={(e) => {
               handleSignInSubmit(e);
-              resetForm()
+              resetForm();
             }}
             isValid={isValid}
           />
