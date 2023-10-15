@@ -8,19 +8,43 @@ import Footer from '../Footer/Footer';
 import styles from './Movies.module.css';
 import moviesApi from '../../utils/MoviesApi';
 import useFormAndValidation from '../../hooks/useFormAndInputValidation';
+import { useResize } from '../../hooks/useResize';
 import CardListMessage from './CardListMessage/CardListMessage';
+import {
+  SHORT_MOVIE_DURATION,
+  LARGE_WINDOW_INIT,
+  LARGE_WINDOW_STEP,
+  MEDIUM_WINDOW_SIZE,
+  MEDIUM_WINDOW_INIT,
+  MEDIUM_WINDOW_STEP,
+  SMALL_WINDOW_SIZE,
+  SMALL_WINDOW_INIT,
+  SMALL_WINDOW_STEP,
+} from '../../utils/constants';
 
 function Movies(props) {
   const [isLoading, setIsLoading] = useState(false);
-  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, setIsValid } = useFormAndValidation();
   const [shortMoviesToggle, setShortMoviesToggle] = useState(false);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [hasFilteredMovies, setHasFilteredMovies] = useState(true);
   const [shownMovies, setShownMovies] = useState([]);
   const [showMoreButton, setShowMoreButton] = useState(false);
-  const windowWidth = window.innerWidth;
+  const windowWidth = useResize();
 
+  // получение данных поиска из localStorage при первой загрузке
+  useEffect(() => {
+    const savedFilteredMoviesData = JSON.parse(localStorage.getItem('filteredMoviesData'))
+    if (savedFilteredMoviesData?.searchValue) {
+      values.search = savedFilteredMoviesData.searchValue
+      setIsValid(true)
+      filterMovies() 
+    }
+    if (savedFilteredMoviesData?.shortMovies) setShortMoviesToggle(savedFilteredMoviesData.shortMovies)
+  }, [])
+
+  // получение списка всех фильмов с сервера если их нет в localStorage
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem('movies'))?.length > 0) {
       setIsLoading(true);
@@ -41,27 +65,37 @@ function Movies(props) {
       JSON.parse(localStorage.getItem('movies')).filter((movie) => {
         if (shortMoviesToggle) {
           return (
-            movie.nameRU.toLowerCase().includes(values.search.toLowerCase()) &&
-            movie.duration <= 40
+            movie.nameRU.toLowerCase().includes(values?.search?.toLowerCase()) &&
+            movie.duration <= SHORT_MOVIE_DURATION
           );
         } else
           return movie.nameRU
             .toLowerCase()
-            .includes(values.search.toLowerCase());
+            .includes(values?.search?.toLowerCase());
+      })
+    );
+  }
+
+  function saveFiltersDataToLocalStorage() {
+    localStorage.setItem(
+      'filteredMoviesData',
+      JSON.stringify({
+        movies: filteredMovies,
+        searchValue: values?.search?.toLowerCase(),
+        shortMovies: shortMoviesToggle,
       })
     );
   }
 
   function cardsQuantities() {
-    const quantities = { init: 12, step: 3 };
-    if (windowWidth < 682) {
-      quantities.init = 5;
-      quantities.step = 2;
-    } else if (windowWidth < 1281) {
-      quantities.init = 8;
-      quantities.step = 2;
+    const quantities = { init: LARGE_WINDOW_INIT, step: LARGE_WINDOW_STEP };
+    if (windowWidth <= SMALL_WINDOW_SIZE) {
+      quantities.init = SMALL_WINDOW_INIT;
+      quantities.step = SMALL_WINDOW_STEP;
+    } else if (windowWidth <= MEDIUM_WINDOW_SIZE) {
+      quantities.init = MEDIUM_WINDOW_INIT;
+      quantities.step = MEDIUM_WINDOW_STEP;
     }
-
     return quantities;
   }
 
@@ -80,19 +114,26 @@ function Movies(props) {
   // отображение начальных карточек
   useEffect(() => {
     setShownMovies(filteredMovies.slice(0, cardsQuantities().init));
-  }, [filteredMovies]);
+  }, [filteredMovies, windowWidth, shortMoviesToggle]);
 
   // проверка необходимости кнопки ShowMoreButton
   useEffect(() => {
     if (shownMovies < filteredMovies) setShowMoreButton(true);
     else setShowMoreButton(false);
-  }, [shownMovies, filteredMovies]);
+  }, [shownMovies, filteredMovies, shortMoviesToggle]);
 
   useEffect(() => {
     if (isFirstLoad) {
       setIsFirstLoad(false);
-    } else setHasFilteredMovies(filteredMovies.length > 0);
+    } else {
+      setHasFilteredMovies(filteredMovies.length > 0);
+    }
+    saveFiltersDataToLocalStorage()
   }, [filteredMovies]);
+
+  useEffect(() => {
+    if (!isFirstLoad) filterMovies();
+  }, [shortMoviesToggle]);
 
   return (
     <>

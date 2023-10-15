@@ -12,6 +12,7 @@ function Register(props) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
   const navigate = useNavigate();
+  const [isPendingServerResponse, setIsPendingServerResponse] = useState(false);
   const [serverResponseMessage, setServerResponseMessage] = useState('');
   const [serverResponseError, setServerResponseError] = useState(false);
 
@@ -25,13 +26,13 @@ function Register(props) {
   }
 
   function handleSignUpSubmit(e) {
+    setIsPendingServerResponse(true);
     e.preventDefault();
-    console.log(values);
     mainApi
       .signup(values)
       .then((res) => {
-        setServerResponseError(false)
-        setServerResponseMessage('Вы успешно зарегистрировались')
+        setServerResponseError(false);
+        setServerResponseMessage('Вы успешно зарегистрировались');
         mainApi
           .signin(values)
           .then((res) => {
@@ -39,12 +40,17 @@ function Register(props) {
             setLoggedIn(true);
             navigate('/movies');
           })
-          .catch((err) => console.error("ошибка логина после регистрации", err ));
+          .catch((err) =>
+            console.error('ошибка логина после регистрации', err)
+          );
       })
       .catch((err) => {
-        setServerResponseError(true)
-        if (err.status === 409) setServerResponseMessage('Email уже используется')
-        console.error("ошибка регистрации", err )});
+        setServerResponseError(true);
+        if (err.status === 409)
+          setServerResponseMessage('Email уже используется');
+        console.error('ошибка регистрации', err);
+      })
+      .finally(() => setIsPendingServerResponse(false));
   }
 
   return (
@@ -63,6 +69,7 @@ function Register(props) {
             values={values}
             onChange={handleChange}
             errors={errors}
+            disabled={isPendingServerResponse}
             required
             minLength={3}
             maxLength={30}
@@ -76,6 +83,7 @@ function Register(props) {
             values={values}
             onChange={handleChange}
             errors={errors}
+            disabled={isPendingServerResponse}
             required
           />
           <InputBlock
@@ -86,6 +94,7 @@ function Register(props) {
             values={values}
             onChange={handleChange}
             errors={errors}
+            disabled={isPendingServerResponse}
             required
             minLength={3}
             maxLength={30}
@@ -96,9 +105,9 @@ function Register(props) {
             error={serverResponseError}
             onClick={(e) => {
               handleSignUpSubmit(e);
-              resetForm();
             }}
             isValid={isValid}
+            isPendingServerResponse={isPendingServerResponse}
           />
         </form>
       </PageAuth>

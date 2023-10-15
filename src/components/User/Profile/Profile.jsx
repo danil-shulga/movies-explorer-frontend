@@ -7,6 +7,7 @@ import SimpleSubmit from './SimpleSubmit/SimpleSubmit';
 import useFormAndValidation from '../../../hooks/useFormAndInputValidation';
 import { Link } from 'react-router-dom';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
+import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
 import mainApi from '../../../utils/MainApi';
 import SubmitButton from '../PageAuth/SubmitButton/SubmitButton';
 
@@ -15,16 +16,18 @@ function Profile(props) {
   const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { savedMovies, setSavedMovies } = useContext(SavedMoviesContext);
   const JWT = JSON.parse(localStorage.getItem('user'))?.token;
   const [isDisable, setIsDisable] = useState(true);
+  const [isPendingServerResponse, setIsPendingServerResponse] = useState(false);
   const [isDifferent, setIsDifferent] = useState(false);
-  const [serverResponseMessage, setServerResponseMessage] = useState('')
-  const [serverResponseError, setServerResponseError] = useState(false)
+  const [serverResponseMessage, setServerResponseMessage] = useState('');
+  const [serverResponseError, setServerResponseError] = useState(false);
 
   // присвоение начальны значений для Name и Email
   useEffect(() => {
     setValues({ name: currentUser.name, email: currentUser.email });
-  }, [serverResponseMessage]);
+  }, [serverResponseMessage, currentUser]);
 
   // сравнение начальных и текущих значений
   useEffect(() => {
@@ -37,23 +40,25 @@ function Profile(props) {
   }, [values, currentUser]);
 
   function handlePatchUserSubmit(e) {
+    setIsPendingServerResponse(true);
     e.preventDefault();
     mainApi
       .patchUserInfo(values, JWT)
       .then((res) => {
         setCurrentUser(res);
-        setServerResponseError(false)
-        setServerResponseMessage('данные изменены')
-        resetForm();
+        setServerResponseError(false);
+        setServerResponseMessage('данные изменены');
       })
       .catch((err) => {
-        console.error('ошибка редактирования профиля', err);
-        setServerResponseError(true)
-        if (err.status >= 400) setServerResponseMessage(`Email: ${values.email} уже используется`)
-        else setServerResponseMessage(`при обновлении данных произошла ошибка`)
-        resetForm();
-      });
+        setServerResponseError(true);
+        if (err.status >= 400)
+          setServerResponseMessage(`Email: ${values.email} уже используется`);
+        else setServerResponseMessage(`при обновлении данных произошла ошибка`);
+      })
+      .finally(() => setIsPendingServerResponse(false));
   }
+
+  console.log(isDisable || isPendingServerResponse, isDisable, isPendingServerResponse)
 
   return (
     <>
@@ -63,10 +68,10 @@ function Profile(props) {
           <form className={styles.profile__form}>
             <SimpleInput
               label="Имя"
-              placeholder='Name'
+              placeholder="Name"
               type="text"
               name="name"
-              isDisable={isDisable}
+              isDisable={isDisable || isPendingServerResponse}
               values={values}
               onChange={handleChange}
               errors={errors}
@@ -79,7 +84,7 @@ function Profile(props) {
               placeholder="Email"
               type="email"
               name="email"
-              isDisable={isDisable}
+              isDisable={isDisable || isPendingServerResponse}
               values={values}
               onChange={handleChange}
               errors={errors}
@@ -104,9 +109,9 @@ function Profile(props) {
                 error={serverResponseError}
                 onClick={(e) => {
                   handlePatchUserSubmit(e);
-                  resetForm();
                 }}
                 isValid={isValid && isDifferent}
+                isPendingServerResponse={isPendingServerResponse}
               />
             )}
           </form>
@@ -114,11 +119,12 @@ function Profile(props) {
             <Link
               className={styles.profile__navLink}
               onClick={() => {
-                localStorage.removeItem('user');
+                localStorage.clear();
                 setLoggedIn(false);
                 setCurrentUser({});
+                setSavedMovies({});
               }}
-              to="/signin">
+              to="/">
               Выйти из аккаунта
             </Link>
           </p>

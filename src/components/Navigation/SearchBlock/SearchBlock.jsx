@@ -42,6 +42,7 @@ function SearchBlock(props) {
           <Checkbox
             shortMoviesToggle={shortMoviesToggle}
             setShortMoviesToggle={setShortMoviesToggle}
+            isValid={isValid}
             text="Короткометражки"
           />
         </div>

@@ -12,6 +12,7 @@ function Login(props) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
   const navigate = useNavigate();
+  const [isPendingServerResponse, setIsPendingServerResponse] = useState(false);
   const [serverResponseMessage, setServerResponseMessage] = useState('');
   const [serverResponseError, setServerResponseError] = useState(false);
 
@@ -25,6 +26,7 @@ function Login(props) {
   }
 
   function handleSignInSubmit(e) {
+    setIsPendingServerResponse(true);
     e.preventDefault();
     mainApi
       .signin(values)
@@ -41,7 +43,8 @@ function Login(props) {
         if (err.status === 401)
           setServerResponseMessage('Неверная почта или пароль');
         else setServerResponseMessage('Ошибка при входе в систему');
-      });
+      })
+      .finally(() => setIsPendingServerResponse(false));
   }
 
   return (
@@ -61,6 +64,7 @@ function Login(props) {
             values={values}
             onChange={handleChange}
             errors={errors}
+            disabled={isPendingServerResponse}
             required
           />
           <InputBlock
@@ -71,6 +75,7 @@ function Login(props) {
             values={values}
             onChange={handleChange}
             errors={errors}
+            disabled={isPendingServerResponse}
             required
           />
           <SubmitButton
@@ -79,9 +84,9 @@ function Login(props) {
             error={serverResponseError}
             onClick={(e) => {
               handleSignInSubmit(e);
-              resetForm();
             }}
             isValid={isValid}
+            isPendingServerResponse={isPendingServerResponse}
           />
         </form>
       </PageAuth>

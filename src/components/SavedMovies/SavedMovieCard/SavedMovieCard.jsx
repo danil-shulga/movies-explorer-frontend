@@ -3,6 +3,7 @@ import styles from './SavedMovieCard.module.css';
 import mainApi from '../../../utils/MainApi';
 import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
 import { Link } from 'react-router-dom';
+import durationCalc from '../../../utils/durationCalc'
 
 function SavedMovieCard(props) {
   const JWT = JSON.parse(localStorage.getItem('user'))?.token;
@@ -17,10 +18,6 @@ function SavedMovieCard(props) {
         setSavedMovies((movies) => movies.filter((movie) => movie._id !== _id));
       })
       .catch((err) => console.error('ошибка при удалении фильма', err));
-  }
-
-  function durationCalc(duration) {
-    return `${Math.floor(duration / 60)}ч ${duration % 60}м`;
   }
 
   return (

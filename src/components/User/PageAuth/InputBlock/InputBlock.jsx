@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './InputBlock.module.css';
 
 function InputBlock(props) {
-  const { label, type, name, values, pattern, onChange, errors, required, minLength, maxLength, placeholder } = props;
+  const { label, type, name, values, pattern, onChange, errors, required, minLength, maxLength, placeholder, disabled } = props;
 
   return (
     <label className={styles.inputBlock}>
@@ -17,6 +17,7 @@ function InputBlock(props) {
         minLength={minLength}
         maxLength={maxLength}
         placeholder={placeholder}
+        disabled={disabled}
 
         className={`${styles.inputBlock__input} ${
           errors[name] && styles.inputBlock__input_error

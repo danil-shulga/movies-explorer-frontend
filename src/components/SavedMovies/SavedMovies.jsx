@@ -8,6 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import SavedMoviesCard from '../SavedMovies/SavedMovieCard/SavedMovieCard';
 import SavedMoviesContext from '../../contexts/SavedMoviesContext';
 import useFormAndValidation from '../../hooks/useFormAndInputValidation';
+import { SHORT_MOVIE_DURATION } from '../../utils/constants';
 
 function SavedMovies(props) {
   const { savedMovies, setSavedMovies } = useContext(SavedMoviesContext);
@@ -16,14 +17,15 @@ function SavedMovies(props) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const { values, handleChange, errors, isValid } = useFormAndValidation();
 
-
   function filterMovies() {
     setFilteredMovies(
       savedMovies.filter((movie) => {
         if (shortMoviesToggle) {
           return (
-            movie.nameRU.toLowerCase().includes(values?.search?.toLowerCase() || '') &&
-            movie.duration <= 40
+            movie.nameRU
+              .toLowerCase()
+              .includes(values?.search?.toLowerCase() || '') &&
+            movie.duration <= SHORT_MOVIE_DURATION
           );
         } else
           return movie.nameRU
@@ -35,14 +37,17 @@ function SavedMovies(props) {
 
   // перерисовка отфильтрованных карточек при удалении с сохранением фильтра
   useEffect(() => {
-    filterMovies()
-  }, [savedMovies])
-
+    filterMovies();
+  }, [savedMovies]);
 
   // отображение начальных карточек
   useEffect(() => {
-    setFilteredMovies(savedMovies)
-  }, [])
+    setFilteredMovies(savedMovies);
+  }, []);
+
+  useEffect(() => {
+    filterMovies();
+  }, [shortMoviesToggle]);
 
   return (
     <>
