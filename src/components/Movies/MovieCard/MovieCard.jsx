@@ -3,12 +3,13 @@ import styles from './MovieCard.module.css';
 import mainApi from '../../../utils/MainApi';
 import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
 import { Link } from 'react-router-dom';
-import durationCalc from '../../../utils/durationCalc'
+import durationCalc from '../../../utils/durationCalc';
 
 function MovieCard(props) {
   const JWT = JSON.parse(localStorage.getItem('user'))?.token;
   const [isLiked, setIsLiked] = useState(false);
   const [currentSavedCardId, setCurrentSavedCardId] = useState('');
+  const [isPendingServerResponse, setIsPendingServerResponse] = useState(false);
   const { movie } = props;
   const { savedMovies, setSavedMovies } = useContext(SavedMoviesContext);
   const { id, nameRU, duration, image, trailerLink } = movie;
@@ -30,6 +31,7 @@ function MovieCard(props) {
   }
 
   function addMovieToServer(movie, JWT) {
+    setIsPendingServerResponse(true);
     return mainApi
       .createMovie(movie, JWT)
       .then((res) => {
@@ -37,10 +39,12 @@ function MovieCard(props) {
         setSavedMovies((movies) => [...movies, res]);
         setIsLiked(true);
       })
-      .catch((err) => console.error('ошибка при сохранении фильма', err));
+      .catch((err) => console.error('ошибка при сохранении фильма', err))
+      .finally(() => setIsPendingServerResponse(false));
   }
 
   function deleteMovieFromServer(_id, JWT) {
+    setIsPendingServerResponse(true);
     return mainApi
       .deleteMovie(_id, JWT)
       .then((res) => {
@@ -49,7 +53,8 @@ function MovieCard(props) {
         );
         setIsLiked(false);
       })
-      .catch((err) => console.error('ошибка при удалении фильма', err));
+      .catch((err) => console.error('ошибка при удалении фильма', err))
+      .finally(() => setIsPendingServerResponse(false));
   }
 
   return (
@@ -66,8 +71,9 @@ function MovieCard(props) {
           className={`${styles.movieCard__button} ${
             isLiked && styles.movieCard__button_active
           }`}
+          disabled={isPendingServerResponse}
           onClick={(e) => {
-            e.preventDefault()
+            e.preventDefault();
             if (!isLiked) {
               addMovieToServer(movie, JWT);
             } else {
