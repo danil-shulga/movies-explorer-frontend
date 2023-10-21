@@ -1,4 +1,4 @@
-.movieCard {
+.savedMovieCard {
   width: 100%;
   border-radius: 6px;
   overflow: hidden;
@@ -6,23 +6,22 @@
   text-decoration: none;
 }
 
-.movieCard__img {
+.savedMovieCard__img {
   position: relative;
   z-index: 1;
   display: block;
   width: 100%;
   height: 72.3%;
-
   object-fit: cover;
   background: #1b1827;
   transition: ease-in-out .3s;
 }
 
-.movieCard:hover .movieCard__img {
+.savedMovieCard:hover .savedMovieCard__img {
   transform: scale(106%);
 }
 
-.movieCard__description {
+.savedMovieCard__description {
   position: relative;
   z-index: 5;
   display: grid;
@@ -40,7 +39,7 @@
   background: #222;
 }
 
-.movieCard__name {
+.savedMovieCard__name {
   grid-area: name;
   margin: 0;
   max-height: 100%;
@@ -55,7 +54,7 @@
   color: #FFF;
 }
 
-.movieCard__duration {
+.savedMovieCard__duration {
   grid-area: duration;
   margin: 10px 0 0;
   font-size: 11px;
@@ -63,7 +62,7 @@
   color: #8b8b8b;
 }
 
-.movieCard__button {
+.savedMovieCard__button {
   grid-area: button;
   justify-self: end;
   width: 30px;
@@ -71,35 +70,44 @@
   border: 0;
 
   cursor: pointer;
-  background: url(../../../images/movieCard_like.svg) 50% 50%/16px no-repeat;
-  transition: scale ease-in .01s, opacity ease-in .2s, background ease-in .2s;
+  opacity: 0;
+  background: url(../../../images/close.svg) 50% 50%/16px no-repeat;
+  transition: scale ease-in .01s, opacity ease-in .2s, background ease-in .2s, transform ease-in .2s;
 }
 
-.movieCard__button_active {
-  background: url(../../../images/movieCard_like_active.svg) 50% 50%/16px no-repeat;
+.savedMovieCard:hover .savedMovieCard__button {
+  opacity: 1;
 }
 
-.movieCard__button:active {
+.savedMovieCard__button:active {
   transform: scale(120%);
 }
 
-.movieCard__button:hover {
+.savedMovieCard__button:hover {
+  transform: rotate(90deg);
   opacity: .7;
 }
 
 @media (max-width: 425px) {
-  .movieCard__name {
+  .savedMovieCard__name {
     font-size: 12px;
     font-weight: 500;
     line-height: 1.2;
   }
 
-  .movieCard__duration {
+  .savedMovieCard__duration {
     font-size: 10px;
     line-height: 1.2;
   }
 
-  .movieCard__description {
+  .savedMovieCard__description {
     padding: 14px;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .savedMovieCard__button {
+    opacity: 1;
   }
 }

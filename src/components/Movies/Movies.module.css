@@ -2,4 +2,38 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  background: #202020;
+}
+
+.movies__showMore {
+  margin: 50px 70px 0;
+  height: 36px;
+
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+
+  cursor: pointer;
+  background: #2F2F2F;
+  border: 0;
+  border-radius: 8px;
+
+  transition: ease-in .3s;
+}
+
+.movies__showMore:hover {
+  opacity: .8;
+}
+
+@media (max-width: 1280px) {
+  .movies__showMore {
+    margin: 50px calc(30px + (70 - 30) * (100vw - 768px) / (1280 - 768)) 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .movies__showMore {
+    margin: 50px calc(14px + (30 - 14) * (100vw - 320px) / (768 - 320)) 0;
+  }
 }

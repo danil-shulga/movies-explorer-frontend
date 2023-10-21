@@ -5,14 +5,12 @@ function SimpleSubmit(props) {
   const { text, isValid, onClick } = props;
 
   return (
-    <input
-      className={`${styles.simpleSubmit} ${
-        !isValid && styles.simpleSubmit_disabled
-      }`}
-      type="submit"
+    <button
+      className={`${styles.simpleSubmit}`}
+      type="button"
       value={text}
-      disabled={!isValid}
-    />
+      onClick={onClick}
+    >{text}</button>
   );
 }
 
